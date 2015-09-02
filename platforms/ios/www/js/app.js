@@ -5,10 +5,13 @@
     var service = new EmployeeService();
     service.initialize().done(function () {
         console.log("Service initialized");
-        renderHomeView();
+        //renderHomeView();
+        $('body').html(new HomeView(service).render().$el);
     });
-    var homeTpl = Handlebars.compile($("#home-tpl").html());
-    var employeeListTpl = Handlebars.compile($("#employee-list-tpl").html());
+    //var homeTpl = Handlebars.compile($("#home-tpl").html());
+    //var employeeListTpl = Handlebars.compile($("#employee-list-tpl").html());
+    HomeView.prototype.template = Handlebars.compile($("#home-tpl").html());
+    EmployeeListView.prototype.template = Handlebars.compile($("#employee-list-tpl").html());
     /* --------------------------------- Event Registration -------------------------------- */
     //$('.search-key').on('keyup', findByName);
     /*$('.help-btn').on('click', function() {
@@ -55,6 +58,7 @@
         $('body').html(html);
         $('.search-key').on('keyup', findByName);
     }*/
+    /*
     function renderHomeView() {
         $('body').html(homeTpl());
         $('.search-key').on('keyup', findByName);
@@ -63,5 +67,5 @@
         service.findByName($('.search-key').val()).done(function (employees) {
             $('.content').html(employeeListTpl(employees));
         });
-    }
+    }*/
 }());
