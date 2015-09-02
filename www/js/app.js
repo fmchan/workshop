@@ -3,18 +3,22 @@
 
     /* ---------------------------------- Local Variables ---------------------------------- */
     var service = new EmployeeService();
+    var slider = new PageSlider($('body'));
+
     service.initialize().done(function () {
         console.log("Service initialized");
         //renderHomeView();
         //$('body').html(new HomeView(service).render().$el);
 
         router.addRoute('', function() {
-            $('body').html(new HomeView(service).render().$el);
+            //$('body').html(new HomeView(service).render().$el);
+            slider.slidePage(new HomeView(service).render().$el);
         });
 
         router.addRoute('employees/:id', function(id) {
             service.findById(parseInt(id)).done(function(employee) {
-                $('body').html(new EmployeeView(employee).render().$el);
+                //$('body').html(new EmployeeView(employee).render().$el);
+                slider.slidePage(new EmployeeView(employee).render().$el);
             });
         });
 
